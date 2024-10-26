@@ -16,7 +16,6 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <!-- Icono de perfil -->
         <Button
             android:id="@+id/btnBack"
             style="?attr/materialIconButtonStyle"
@@ -43,5 +42,214 @@
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Desayuno CardView -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardBreakfast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="12dp"
+        app:strokeColor="@android:color/darker_gray"
+        app:strokeWidth="1dp"
+        android:backgroundTint="@android:color/white"
+        android:clickable="true"
+        android:focusable="true">
+
+        <!-- Layout interno de la tarjeta -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="16dp"
+            android:paddingHorizontal="20dp">
+
+            <!-- Título y estado del alimento -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <!-- Título -->
+                <TextView
+                    android:id="@+id/tvDesayuno"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Desayuno"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black" />
+
+                <!-- Estado del registro -->
+                <TextView
+                    android:id="@+id/tvStateBreakfast"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ya se registró"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginBottom="6dp" />
+            </LinearLayout>
+
+            <!-- Botón con icono en el extremo derecho -->
+            <Button
+                style="?attr/materialIconButtonFilledTonalStyle"
+                android:id="@+id/btnBreakfast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"
+                app:icon="@drawable/ic_arrow_right"
+                android:contentDescription="@string/details"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="8dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Lunch CardView -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardLunch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="18dp"
+        app:cardCornerRadius="12dp"
+        app:strokeColor="@android:color/darker_gray"
+        app:strokeWidth="1dp"
+        android:backgroundTint="@android:color/white"
+        android:clickable="true"
+        android:focusable="true">
+
+        <!-- Layout interno de la tarjeta -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="16dp"
+            android:paddingHorizontal="20dp">
+
+            <!-- Título y estado del alimento -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <!-- Título -->
+                <TextView
+                    android:id="@+id/tvLunch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Almuerzo"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black" />
+
+                <!-- Estado del registro -->
+                <TextView
+                    android:id="@+id/tvStateLunch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ya se registró"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginBottom="6dp" />
+            </LinearLayout>
+
+            <!-- Botón con icono en el extremo derecho -->
+            <Button
+                style="?attr/materialIconButtonFilledTonalStyle"
+                android:id="@+id/btnLunch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"
+                app:icon="@drawable/ic_arrow_right"
+                android:contentDescription="@string/details"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="8dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Dinner CardView -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardDinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        app:cardCornerRadius="12dp"
+        app:strokeColor="@android:color/darker_gray"
+        app:strokeWidth="1dp"
+        android:backgroundTint="@android:color/white"
+        android:clickable="true"
+        android:focusable="true">
+
+        <!-- Layout interno de la tarjeta -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="16dp"
+            android:paddingHorizontal="20dp">
+
+            <!-- Título y estado del alimento -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <!-- Título -->
+                <TextView
+                    android:id="@+id/tvDinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cena"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black" />
+
+                <!-- Estado del registro -->
+                <TextView
+                    android:id="@+id/tvStateDinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Falta registrar"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginBottom="6dp" />
+            </LinearLayout>
+
+            <!-- Botón con icono en el extremo derecho -->
+            <Button
+                style="?attr/materialIconButtonFilledTonalStyle"
+                android:id="@+id/btnDinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"
+                app:icon="@drawable/ic_arrow_right"
+                android:contentDescription="@string/details"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="8dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>

@@ -1,6 +1,5 @@
 package com.example.calorimetro.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -10,16 +9,17 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.calorimetro.R;
-import com.example.calorimetro.databinding.ActivityMealsBinding;
+import com.example.calorimetro.databinding.ActivityDinnerBinding;
 
-public class MealsActivity extends AppCompatActivity {
+public class DinnerActivity extends AppCompatActivity {
 
-    ActivityMealsBinding binding;
+    ActivityDinnerBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMealsBinding.inflate(getLayoutInflater());
+
+        binding = ActivityDinnerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         EdgeToEdge.enable(this);
@@ -32,21 +32,6 @@ public class MealsActivity extends AppCompatActivity {
         // funciones de botones
         binding.btnBack.setOnClickListener(view -> {
             finish();
-        });
-
-        binding.cardBreakfast.setOnClickListener(view -> {
-            Intent intent = new Intent(this, BreakfastActivity.class);
-            startActivity(intent);
-        });
-
-        binding.cardLunch.setOnClickListener(view -> {
-            Intent intent = new Intent(this, LunchActivity.class);
-            startActivity(intent);
-        });
-
-        binding.cardDinner.setOnClickListener(view -> {
-            Intent intent = new Intent(this, DinnerActivity.class);
-            startActivity(intent);
         });
     }
 }
