@@ -50,7 +50,6 @@ public class ProfileActivity extends AppCompatActivity {
         String objetivo = sharedPref.getString("objetivo", "N/A");
 
         // Asignar los valores recuperados a los TextViews
-        binding.tvTitle.setText("Perfil");
         binding.tvPeso.setText(peso + " kg");
         binding.tvAltura.setText(altura + " m");
         binding.tvEdad.setText(edad + " años");

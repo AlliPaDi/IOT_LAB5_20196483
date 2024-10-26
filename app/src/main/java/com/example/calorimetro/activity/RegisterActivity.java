@@ -1,5 +1,6 @@
 package com.example.calorimetro.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -53,6 +54,9 @@ public class RegisterActivity extends AppCompatActivity {
                 if (validateFields()) {
                     saveUserData();
                     Toast.makeText(RegisterActivity.this, "Registro exitoso", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
                 } else {
                     Toast.makeText(RegisterActivity.this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
                 }
@@ -123,6 +127,14 @@ public class RegisterActivity extends AppCompatActivity {
         String nivelFisico = binding.autoCompleteNivFisico.getText().toString().trim();
         String objetivo = binding.autoCompleteObjetivo.getText().toString().trim();
 
+        // Convertir los datos necesarios a tipos numéricos
+        double pesoDouble = Double.parseDouble(peso);
+        double alturaDouble = Double.parseDouble(altura) * 100;
+        int edadInt = Integer.parseInt(edad);
+
+        // Realizar el cálculo de TMB
+        double tmb = calculateTMB(pesoDouble, alturaDouble, edadInt, genero, nivelFisico, objetivo);
+
         // Guardar la información en SharedPreferences
         SharedPreferences sharedPref = getSharedPreferences("UserProfile", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -134,7 +146,54 @@ public class RegisterActivity extends AppCompatActivity {
         editor.putString("nivelFisico", nivelFisico);
         editor.putString("objetivo", objetivo);
 
+        // Guardar resultado de las calorías calculadas
+        editor.putFloat("caloriasDiarias", (float) tmb);
+
         // Confirmar que se han guardado los datos
         editor.apply();
+    }
+
+    private double calculateTMB(double peso, double altura, int edad, String genero, String nivelFisico, String objetivo) {
+        double tmb;
+
+        // Fórmula de Harris-Benedict
+        if (genero.equalsIgnoreCase("Masculino")) {
+            tmb = (10 * peso) + (6.25 * altura) - (5 * edad) + 5;
+        } else {
+            tmb = (10 * peso) + (6.25 * altura) - (5 * edad) - 161;
+        }
+
+        // Extraer solo la primera palabra de nivelFisico
+        String primeraPalabra = nivelFisico.split(" ")[0].toLowerCase();
+
+        // Ajustar según el nivel de actividad física
+        double tmbConActividad = 0;
+        switch (primeraPalabra) {
+            case "sedentario":
+                tmbConActividad = tmb * 1.2;
+                break;
+            case "ligero":
+                tmbConActividad = tmb * 1.375;
+                break;
+            case "moderado":
+                tmbConActividad = tmb * 1.55;
+                break;
+            case "fuerte":
+                tmbConActividad = tmb * 1.725;
+                break;
+            case "muy":
+                tmbConActividad = tmb * 1.9;
+                break;
+        }
+
+        // Ajustar según el objetivo
+        if (objetivo.equalsIgnoreCase("Ganar peso")) {
+            tmbConActividad += 500;
+        } else if (objetivo.equalsIgnoreCase("Perder peso")) {
+            tmbConActividad -= 300;
+        }
+
+        // Retornar el resultado del cálculo
+        return tmbConActividad;
     }
 }

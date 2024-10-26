@@ -26,7 +26,7 @@
     </string-array>
 
     <string-array name="niv_fisico_options">
-        <item>Ninguno</item>
+        <item>Sedentario (poco o ningún ejercicio)</item>
         <item>Ligero (1-3 días por semana)</item>
         <item>Moderado (3-5 días por semana)</item>
         <item>Fuerte (6-7 días por semana)</item>

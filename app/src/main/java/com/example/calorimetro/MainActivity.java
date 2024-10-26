@@ -2,6 +2,8 @@ package com.example.calorimetro;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.content.Context;
+import android.content.SharedPreferences;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,15 +33,18 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        // funciones de botones
-        binding.btnHome.setOnClickListener(v->{
-            Intent intent = new Intent(this, HomeActivity.class);
+        // Verificar si los datos del usuario ya están guardados
+        SharedPreferences sharedPref = getSharedPreferences("UserProfile", Context.MODE_PRIVATE);
+        if (sharedPref.contains("peso") && sharedPref.contains("altura") && sharedPref.contains("edad") && sharedPref.contains("genero") && sharedPref.contains("nivelFisico") && sharedPref.contains("objetivo")) {
+            // Si los datos están guardados, ir directamente a la pantalla principal
+            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
             startActivity(intent);
-        });
-
-        binding.btnRegister.setOnClickListener(v->{
-            Intent intent = new Intent(this, RegisterActivity.class);
+            finish();
+        } else {
+            // Si no hay datos guardados, ir a la pantalla de registro
+            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
             startActivity(intent);
-        });
+            finish();
+        }
     }
 }

@@ -1,6 +1,8 @@
 package com.example.calorimetro.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -50,5 +52,18 @@ public class HomeActivity extends AppCompatActivity {
             Intent intent = new Intent(this, TrainingActivity.class);
             startActivity(intent);
         });
+
+        // Mostrar las calorías calculadas
+        showCaloriesGoal();
+
     }
+    private void showCaloriesGoal() {
+        // Recuperar el valor de las calorías calculadas
+        SharedPreferences sharedPref = getSharedPreferences("UserProfile", Context.MODE_PRIVATE);
+        float caloriasDiarias = sharedPref.getFloat("caloriasDiarias", 0);
+
+        // Actualizar el TextView con el valor de las calorías
+        binding.tvCaloriesGoal.setText(String.format("de %.2f kcal", caloriasDiarias));
+    }
+
 }
