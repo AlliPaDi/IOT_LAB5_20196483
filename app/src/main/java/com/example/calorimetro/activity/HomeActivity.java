@@ -1,4 +1,4 @@
-package com.example.calorimetro;
+package com.example.calorimetro.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,19 +9,18 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.calorimetro.activity.HomeActivity;
-import com.example.calorimetro.activity.RegisterActivity;
-import com.example.calorimetro.databinding.ActivityMainBinding;
+import com.example.calorimetro.R;
+import com.example.calorimetro.databinding.ActivityHomeBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
-    ActivityMainBinding binding;
+    ActivityHomeBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         EdgeToEdge.enable(this);
@@ -32,13 +31,23 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // funciones de botones
-        binding.btnHome.setOnClickListener(v->{
-            Intent intent = new Intent(this, HomeActivity.class);
+        binding.btnProfile.setOnClickListener(v->{
+            Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
         });
 
-        binding.btnRegister.setOnClickListener(v->{
-            Intent intent = new Intent(this, RegisterActivity.class);
+        binding.btnNotifications.setOnClickListener(v->{
+            Intent intent = new Intent(this, NotificationsActivity.class);
+            startActivity(intent);
+        });
+
+        binding.btnMeals.setOnClickListener(v->{
+            Intent intent = new Intent(this, MealsActivity.class);
+            startActivity(intent);
+        });
+
+        binding.btnTraining.setOnClickListener(v->{
+            Intent intent = new Intent(this, TrainingActivity.class);
             startActivity(intent);
         });
     }

@@ -1,4 +1,4 @@
-package com.example.calorimetro;
+package com.example.calorimetro.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,19 +9,17 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.calorimetro.activity.HomeActivity;
-import com.example.calorimetro.activity.RegisterActivity;
-import com.example.calorimetro.databinding.ActivityMainBinding;
+import com.example.calorimetro.R;
+import com.example.calorimetro.databinding.ActivityTrainingBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class TrainingActivity extends AppCompatActivity {
 
-    ActivityMainBinding binding;
+    ActivityTrainingBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityTrainingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         EdgeToEdge.enable(this);
@@ -32,13 +30,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // funciones de botones
-        binding.btnHome.setOnClickListener(v->{
-            Intent intent = new Intent(this, HomeActivity.class);
-            startActivity(intent);
+        binding.btnBack.setOnClickListener(v->{
+            finish();
         });
 
-        binding.btnRegister.setOnClickListener(v->{
-            Intent intent = new Intent(this, RegisterActivity.class);
+        binding.btnAdd.setOnClickListener(v->{
+            Intent intent = new Intent(this, AddTrainingActivity.class);
             startActivity(intent);
         });
     }

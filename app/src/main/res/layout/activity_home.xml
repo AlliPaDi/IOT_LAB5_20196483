@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    tools:context=".activity.HomeActivity">
+
+    <!-- Header con logo y opciones -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Icono de perfil -->
+        <Button
+            android:id="@+id/btnProfile"
+            style="?attr/materialIconButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/btnProfile"
+            android:layout_marginStart="12dp"
+            app:icon="@drawable/ic_profile"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <!-- Título centrado -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_title"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:textAllCaps="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <!-- Icono de notificaciones -->
+        <Button
+            android:id="@+id/btnNotifications"
+            style="?attr/materialIconButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/btnNotifications"
+            android:layout_marginEnd="12dp"
+            app:icon="@drawable/ic_notifications"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Barra de progreso -->
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp">
+
+        <!-- Barra de progreso semicircular -->
+        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+            android:id="@+id/circularProgressBar"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            app:cpb_start_angle="0"
+            app:cpb_progress_direction="to_right"
+            app:cpb_background_progressbar_color="#FFE0E0E0"
+            app:cpb_progressbar_color="@color/green"
+            app:cpb_progressbar_width="12dp"
+            app:cpb_background_progressbar_width="12dp"
+            app:cpb_progress="20" />
+
+        <LinearLayout
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <!-- Icono de fuego en el centro -->
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_fire"
+                android:contentDescription="@string/fire_icon" />
+
+            <!-- Texto para las calorías -->
+            <TextView
+                android:id="@+id/tvACtCalories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/act_calories"
+                android:textSize="26sp"
+                android:textColor="@color/green"
+                android:textStyle="bold" />
+
+            <!-- Texto para la meta -->
+            <TextView
+                android:id="@+id/tvCaloriesGoal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="de 2213 kcal"
+                android:textSize="18sp"
+                android:textColor="@android:color/black" />
+
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- Mensaje para la meta -->
+    <TextView
+        android:id="@+id/tvMsgGoal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Te faltan 180 kilocalorías más para la meta"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="24dp" />
+
+    <!-- Mensaje de motivación -->
+    <TextView
+        android:id="@+id/tvMotivation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recuerda comer algo saludable"
+        android:textSize="16sp"
+        android:textColor="@android:color/darker_gray" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title_details"
+        android:textSize="22sp"
+        android:layout_marginHorizontal="22dp"
+        android:padding="6dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Tarjetas (Cards) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="20dp"
+        android:gravity="center_horizontal">
+
+        <!-- Primera CardView -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardMeal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            app:cardCornerRadius="12dp"
+            app:strokeColor="@android:color/darker_gray"
+            app:strokeWidth="1dp"
+            android:backgroundTint="@android:color/white">
+
+            <!-- Layout interno de la tarjeta -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:contentDescription="comida"
+                    android:src="@drawable/ic_meal" />
+
+                <!-- Título del alimento -->
+                <TextView
+                    android:id="@+id/tvCalConsumed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="50 kcal"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:id="@+id/tvConsumed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="consumidas"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginBottom="6dp" />
+
+                <Button
+                    style="?attr/materialIconButtonFilledTonalStyle"
+                    android:id="@+id/btnMeals"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:icon="@drawable/ic_arrow_right"
+                    android:contentDescription="@string/details"/>
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Segunda CardView -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardTraining"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            app:cardCornerRadius="12dp"
+            app:strokeColor="@android:color/darker_gray"
+            app:strokeWidth="1dp"
+            android:backgroundTint="@android:color/white">
+
+            <!-- Layout interno de la tarjeta -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:contentDescription="ejercicio"
+                    android:src="@drawable/ic_training" />
+
+                <!-- Título del alimento -->
+                <TextView
+                    android:id="@+id/tvCalBurned"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20 kcal"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:id="@+id/tvBurned"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="quemadas"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginBottom="6dp" />
+
+                <Button
+                    style="?attr/materialIconButtonFilledTonalStyle"
+                    android:id="@+id/btnTraining"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:icon="@drawable/ic_arrow_right"
+                    android:contentDescription="@string/details" />
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+
+</LinearLayout>

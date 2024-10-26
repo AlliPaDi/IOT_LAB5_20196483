@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".activity.NotificationsActivity">
+
+    <!-- Header con logo y opciones -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Icono de perfil -->
+        <Button
+            android:id="@+id/btnBack"
+            style="?attr/materialIconButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/btnBack"
+            android:layout_marginStart="12dp"
+            app:icon="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <!-- Título centrado -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Notificaciones"
+            android:textAlignment="center"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Desayuno -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Desayuno"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingHorizontal="24dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Hora de notificación"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="8dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etNotificationTimeBreakfast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:clickable="true"
+            android:inputType="none" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Almuerzo -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Almuerzo"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingHorizontal="24dp"
+        android:layout_marginTop="12dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Hora de notificación"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="8dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etNotificationTimeLunch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:clickable="true"
+            android:inputType="none" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Cena -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cena"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingHorizontal="24dp"
+        android:layout_marginTop="12dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Hora de notificación"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="8dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etNotificationTimeDinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:clickable="true"
+            android:inputType="none" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Motivación -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Motivación"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingHorizontal="24dp"
+        android:layout_marginTop="12dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Recibir notificación cada"
+        app:suffixText="min"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="8dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etNotMin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLength="3" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+</LinearLayout>
