@@ -84,14 +84,14 @@
                     android:textColor="@android:color/black" />
 
                 <!-- Estado del registro -->
-                <TextView
-                    android:id="@+id/tvStateBreakfast"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ya se registró"
-                    android:textSize="16sp"
-                    android:textColor="@android:color/black"
-                    android:layout_marginBottom="6dp" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tvStateBreakfast"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Ya se registró"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:textColor="@android:color/black"-->
+<!--                    android:layout_marginBottom="6dp" />-->
             </LinearLayout>
 
             <!-- Botón con icono en el extremo derecho -->
@@ -154,14 +154,14 @@
                     android:textColor="@android:color/black" />
 
                 <!-- Estado del registro -->
-                <TextView
-                    android:id="@+id/tvStateLunch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ya se registró"
-                    android:textSize="16sp"
-                    android:textColor="@android:color/black"
-                    android:layout_marginBottom="6dp" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tvStateLunch"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Ya se registró"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:textColor="@android:color/black"-->
+<!--                    android:layout_marginBottom="6dp" />-->
             </LinearLayout>
 
             <!-- Botón con icono en el extremo derecho -->
@@ -223,14 +223,14 @@
                     android:textColor="@android:color/black" />
 
                 <!-- Estado del registro -->
-                <TextView
-                    android:id="@+id/tvStateDinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Falta registrar"
-                    android:textSize="16sp"
-                    android:textColor="@android:color/black"
-                    android:layout_marginBottom="6dp" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tvStateDinner"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Falta registrar"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:textColor="@android:color/black"-->
+<!--                    android:layout_marginBottom="6dp" />-->
             </LinearLayout>
 
             <!-- Botón con icono en el extremo derecho -->
