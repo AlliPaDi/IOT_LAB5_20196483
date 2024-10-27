@@ -102,9 +102,9 @@
                 android:textColor="@color/green"
                 android:textStyle="bold" />
 
-            <!-- Texto para la meta -->
+            <!-- Texto final -->
             <TextView
-                android:id="@+id/tvCaloriesGoal"
+                android:id="@+id/tvCaloriesFinal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="de 2213 kcal"
@@ -128,10 +128,10 @@
 
     <!-- Mensaje de motivación -->
     <TextView
-        android:id="@+id/tvMotivation"
+        android:id="@+id/tvCaloriesGoal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No pierdas tu objetivo"
+        android:text="TMB"
         android:textSize="16sp"
         android:textColor="@android:color/darker_gray" />
 

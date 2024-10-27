@@ -56,49 +56,10 @@ public class HomeActivity extends AppCompatActivity {
 
         // Mostrar las calorías
         showCaloriesGoal();
-        showCaloriesConsumed();
-
-    }
-    private void showCaloriesGoal() {
-        // Recuperar el valor de las calorías calculadas
-        SharedPreferences sharedPref = getSharedPreferences("UserProfile", Context.MODE_PRIVATE);
-        float caloriasDiarias = sharedPref.getFloat("caloriasDiarias", 0);
-
-        // Actualizar el TextView con el valor de las calorías
-        binding.tvCaloriesGoal.setText(String.format("de %.2f kcal", caloriasDiarias));
-    }
-
-    private void showCaloriesConsumed(){
-        SharedPreferences sharedPref = getSharedPreferences("CaloriasComidas", Context.MODE_PRIVATE);
-        int desayuno = sharedPref.getInt("desayuno", 0);
-        int almuerzo = sharedPref.getInt("almuerzo", 0);
-        int cena = sharedPref.getInt("cena", 0);
-
-        int totalCalorias = desayuno + almuerzo + cena;
-
-        // Mostrar el total de calorías consumidas en un TextView
-        binding.tvCalConsumed.setText(totalCalorias + " kcal");
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         updateConsumedCalories();
-        updateCaloriesBurned();
-    }
+        showCaloriesFinal();
+        showCaloriesFaltantes();
 
-    private void updateConsumedCalories() {
-        SharedPreferences sharedPref = getSharedPreferences("CaloriasComidas", Context.MODE_PRIVATE);
-        int desayuno = sharedPref.getInt("desayuno", 0);
-        int almuerzo = sharedPref.getInt("almuerzo", 0);
-        int cena = sharedPref.getInt("cena", 0);
-
-        // Calcular las calorías totales consumidas
-        int totalConsumidas = desayuno + almuerzo + cena;
-
-        // Actualizar el TextView que muestra las calorías consumidas
-        binding.tvCalConsumed.setText(totalConsumidas + " kcal");
     }
 
     private void updateCaloriesBurned() {
@@ -108,10 +69,72 @@ public class HomeActivity extends AppCompatActivity {
         binding.tvCalBurned.setText(caloriesText);
     }
 
+    // Función para obtener las calorías diarias (Goal)
+    private float getCaloriasDiarias() {
+        SharedPreferences sharedPref = getSharedPreferences("UserProfile", Context.MODE_PRIVATE);
+        return sharedPref.getFloat("caloriasDiarias", 0);
+    }
+
+    // Función para obtener las calorías quemadas
+    private float getCaloriasQuemadas() {
+        SharedPreferences sharedPref = getSharedPreferences("CaloriasQuemadas", Context.MODE_PRIVATE);
+        return sharedPref.getFloat("total_calorias", 0);
+    }
+
+    // Función para obtener el total de calorías consumidas (desayuno, almuerzo, cena)
+    private int getCaloriasConsumidas() {
+        SharedPreferences sharedPref = getSharedPreferences("CaloriasComidas", Context.MODE_PRIVATE);
+        int desayuno = sharedPref.getInt("desayuno", 0);
+        int almuerzo = sharedPref.getInt("almuerzo", 0);
+        int cena = sharedPref.getInt("cena", 0);
+        return desayuno + almuerzo + cena;
+    }
+
+    // Mostrar calorías necesarias (Goal)
+    private void showCaloriesGoal() {
+        float caloriasDiarias = getCaloriasDiarias();
+        binding.tvCaloriesGoal.setText(String.format("Calorías necesarias según TMB %.2f kcal", caloriasDiarias));
+    }
+
+    // Actualizar y mostrar las calorías consumidas
+    private void updateConsumedCalories() {
+        int totalConsumidas = getCaloriasConsumidas();
+        binding.tvCalConsumed.setText(totalConsumidas + " kcal");
+        binding.tvACtCalories.setText(totalConsumidas + " kcal");
+    }
+
+    // Mostrar la diferencia entre calorías diarias y calorías quemadas
+    private void showCaloriesFinal() {
+        float caloriasDiarias = getCaloriasDiarias();
+        float caloriasQuemadas = getCaloriasQuemadas();
+        float caloriasRestantes = caloriasDiarias - caloriasQuemadas;
+        binding.tvCaloriesFinal.setText(String.format("de %.2f kcal", caloriasRestantes));
+    }
+
+    // Mostrar las calorías faltantes (calorías restantes - calorías consumidas)
+    private void showCaloriesFaltantes() {
+        float caloriasDiarias = getCaloriasDiarias();
+        float caloriasQuemadas = getCaloriasQuemadas();
+        int caloriasConsumidas = getCaloriasConsumidas();
+
+        float caloriasRestantes = caloriasDiarias - caloriasQuemadas;
+        float caloriasFaltantes = caloriasRestantes - caloriasConsumidas;
+
+        binding.tvMsgGoal.setText(String.format("Te faltan %.2f kcal para la meta", caloriasFaltantes));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateConsumedCalories();
+        showCaloriesFinal();
+        showCaloriesFaltantes();
+        updateCaloriesBurned();
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         binding = null;
     }
-
 }
