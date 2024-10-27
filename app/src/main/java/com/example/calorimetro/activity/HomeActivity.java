@@ -53,8 +53,9 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Mostrar las calorías calculadas
+        // Mostrar las calorías
         showCaloriesGoal();
+        showCaloriesConsumed();
 
     }
     private void showCaloriesGoal() {
@@ -64,6 +65,19 @@ public class HomeActivity extends AppCompatActivity {
 
         // Actualizar el TextView con el valor de las calorías
         binding.tvCaloriesGoal.setText(String.format("de %.2f kcal", caloriasDiarias));
+    }
+
+    private void showCaloriesConsumed(){
+        SharedPreferences sharedPref = getSharedPreferences("CaloriasComidas", Context.MODE_PRIVATE);
+        int desayuno = sharedPref.getInt("desayuno", 0);
+        int almuerzo = sharedPref.getInt("almuerzo", 0);
+        int cena = sharedPref.getInt("cena", 0);
+
+        int totalCalorias = desayuno + almuerzo + cena;
+
+        // Mostrar el total de calorías en un TextView
+        binding.tvCalConsumed.setText(totalCalorias + " kcal");
+
     }
 
 }

@@ -1,6 +1,9 @@
 package com.example.calorimetro.activity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,13 +18,15 @@ import com.example.calorimetro.databinding.ActivityLunchBinding;
 import com.example.calorimetro.model.Food;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class LunchActivity extends AppCompatActivity {
 
     ActivityLunchBinding binding;
-    private FoodAdapter foodAdapter;
-    private List<Food> foodList;
+    FoodAdapter foodAdapter;
+    List<Food> foodList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,5 +61,39 @@ public class LunchActivity extends AppCompatActivity {
         // Configurar el Adapter
         foodAdapter = new FoodAdapter(this, foodList);
         binding.recyclerView.setAdapter(foodAdapter);
+
+        // Verificar si ya se ha guardado una selección de almuerzo
+        SharedPreferences sharedPref = getSharedPreferences("CaloriasComidas", Context.MODE_PRIVATE);
+        boolean almuerzoGuardado = sharedPref.getBoolean("almuerzoGuardado", false);
+
+        if (almuerzoGuardado) {
+            // Recuperar la lista de alimentos seleccionados
+            Set<String> selectedFoodsSet = sharedPref.getStringSet("almuerzoSelectedFoods", new HashSet<>());
+            foodAdapter.setSelectedFoods(selectedFoodsSet);
+        }
+
+        // Guardar calorías seleccionadas
+        binding.btnSave.setOnClickListener(v -> saveSelectedCalories());
+    }
+
+    private void saveSelectedCalories() {
+        // Obtener las calorías totales seleccionadas
+        int totalCalories = 0;
+        List<Food> selectedFoods = foodAdapter.getSelectedFoods();
+        Set<String> selectedFoodsSet = new HashSet<>();
+
+        for (Food food : selectedFoods) {
+            totalCalories += food.getCalories();
+            selectedFoodsSet.add(food.getName());
+        }
+
+        SharedPreferences sharedPref = getSharedPreferences("CaloriasComidas", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("almuerzo", totalCalories);
+        editor.putStringSet("almuerzoSelectedFoods", selectedFoodsSet);
+        editor.putBoolean("almuerzoGuardado", true);
+        editor.apply();
+
+        Toast.makeText(this, "Calorías del almuerzo guardadas: " + totalCalories, Toast.LENGTH_SHORT).show();
     }
 }

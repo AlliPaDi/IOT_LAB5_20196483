@@ -1,6 +1,9 @@
 package com.example.calorimetro.activity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,13 +18,15 @@ import com.example.calorimetro.databinding.ActivityDinnerBinding;
 import com.example.calorimetro.model.Food;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class DinnerActivity extends AppCompatActivity {
 
     ActivityDinnerBinding binding;
-    private FoodAdapter foodAdapter;
-    private List<Food> foodList;
+    FoodAdapter foodAdapter;
+    List<Food> foodList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,5 +61,39 @@ public class DinnerActivity extends AppCompatActivity {
         // Configurar el Adapter
         foodAdapter = new FoodAdapter(this, foodList);
         binding.recyclerView.setAdapter(foodAdapter);
+
+        // Verificar si ya se ha guardado una selección de cena
+        SharedPreferences sharedPref = getSharedPreferences("CaloriasComidas", Context.MODE_PRIVATE);
+        boolean cenaGuardado = sharedPref.getBoolean("cenaGuardado", false);
+
+        if (cenaGuardado) {
+            // Recuperar la lista de alimentos seleccionados
+            Set<String> selectedFoodsSet = sharedPref.getStringSet("cenaSelectedFoods", new HashSet<>());
+            foodAdapter.setSelectedFoods(selectedFoodsSet); // Marcar los alimentos seleccionados
+        }
+
+        // Guardar calorías seleccionadas
+        binding.btnSave.setOnClickListener(v -> saveSelectedCalories());
+    }
+
+    private void saveSelectedCalories() {
+        // Obtener las calorías totales seleccionadas
+        int totalCalories = 0;
+        List<Food> selectedFoods = foodAdapter.getSelectedFoods();
+        Set<String> selectedFoodsSet = new HashSet<>();
+
+        for (Food food : selectedFoods) {
+            totalCalories += food.getCalories();
+            selectedFoodsSet.add(food.getName());
+        }
+
+        SharedPreferences sharedPref = getSharedPreferences("CaloriasComidas", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("cena", totalCalories);
+        editor.putStringSet("cenaSelectedFoods", selectedFoodsSet);
+        editor.putBoolean("cenaGuardado", true);
+        editor.apply();
+
+        Toast.makeText(this, "Calorías de la cena guardadas: " + totalCalories, Toast.LENGTH_SHORT).show();
     }
 }

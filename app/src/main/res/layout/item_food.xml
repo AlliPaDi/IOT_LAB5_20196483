@@ -24,7 +24,7 @@
             android:id="@+id/tvCalories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="100 Cal"
+            android:text="100 kcal"
             android:textSize="16sp"
             android:layout_marginEnd="16dp"
             android:textColor="@color/purple"/>

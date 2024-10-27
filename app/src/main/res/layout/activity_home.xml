@@ -131,7 +131,7 @@
         android:id="@+id/tvMotivation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recuerda comer algo saludable"
+        android:text="No pierdas tu objetivo"
         android:textSize="16sp"
         android:textColor="@android:color/darker_gray" />
 

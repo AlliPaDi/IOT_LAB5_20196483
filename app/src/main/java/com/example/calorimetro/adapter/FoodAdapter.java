@@ -13,12 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.calorimetro.R;
 import com.example.calorimetro.model.Food;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> {
 
     private final List<Food> foodList;
     private final Context context;
+    private List<Food> selectedFoods = new ArrayList<>();
 
     public FoodAdapter(Context context, List<Food> foodList) {
         this.context = context;
@@ -36,12 +39,20 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
     public void onBindViewHolder(@NonNull FoodViewHolder holder, int position) {
         Food food = foodList.get(position);
         holder.tvFoodName.setText(food.getName());
-        holder.tvCalories.setText(String.format("%d Cal", food.getCalories()));
+        holder.tvCalories.setText(String.format("%d kcal", food.getCalories()));
 
-        // Listener para seleccionar el alimento
-        holder.checkBox.setChecked(food.isSelected());
+        // Manejar la selección del checkbox
+        holder.checkBox.setOnCheckedChangeListener(null); // Limpiar el listener previo
+        holder.checkBox.setChecked(selectedFoods.contains(food)); // Marcar el checkbox si ya está seleccionado
+
+
+        holder.checkBox.setEnabled(true);
         holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            food.setSelected(isChecked);
+            if (isChecked) {
+                selectedFoods.add(food); // Añadir alimento seleccionado
+            } else {
+                selectedFoods.remove(food); // Remover alimento deseleccionado
+            }
         });
     }
 
@@ -49,6 +60,21 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
     public int getItemCount() {
         return foodList.size();
     }
+
+    public List<Food> getSelectedFoods() {
+        return selectedFoods; // Retorna la lista de alimentos seleccionados
+    }
+
+    public void setSelectedFoods(Set<String> selectedFoodsSet) {
+        for (Food food : foodList) {
+            if (selectedFoodsSet.contains(food.getName())) {
+                selectedFoods.add(food); // Marcar como seleccionado
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+
 
     public static class FoodViewHolder extends RecyclerView.ViewHolder {
         TextView tvFoodName, tvCalories;
