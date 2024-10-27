@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.calorimetro.R;
 import com.example.calorimetro.databinding.ActivityHomeBinding;
+import com.example.calorimetro.model.ActividadFisica;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -84,6 +85,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         updateConsumedCalories();
+        updateCaloriesBurned();
     }
 
     private void updateConsumedCalories() {
@@ -97,6 +99,19 @@ public class HomeActivity extends AppCompatActivity {
 
         // Actualizar el TextView que muestra las calorías consumidas
         binding.tvCalConsumed.setText(totalConsumidas + " kcal");
+    }
+
+    private void updateCaloriesBurned() {
+        SharedPreferences sharedPref = getSharedPreferences("CaloriasQuemadas", Context.MODE_PRIVATE);
+        float totalCalorias = sharedPref.getFloat("total_calorias", 0f);
+        String caloriesText = String.format("%.2f kcal", totalCalorias);
+        binding.tvCalBurned.setText(caloriesText);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 
 }
