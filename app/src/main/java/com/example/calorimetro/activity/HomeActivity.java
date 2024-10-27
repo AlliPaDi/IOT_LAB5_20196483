@@ -1,12 +1,20 @@
 package com.example.calorimetro.activity;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -22,6 +30,8 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        createNotificationChannel();
 
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -120,8 +130,14 @@ public class HomeActivity extends AppCompatActivity {
         float caloriasRestantes = caloriasDiarias - caloriasQuemadas;
         float caloriasFaltantes = caloriasRestantes - caloriasConsumidas;
 
+        if (caloriasRestantes < caloriasConsumidas) {
+            lanzarNotificacionExcesoCalorias();
+        }
+
         binding.tvMsgGoal.setText(String.format("Te faltan %.2f kcal para la meta", caloriasFaltantes));
     }
+
+
 
     @Override
     protected void onResume() {
@@ -137,4 +153,49 @@ public class HomeActivity extends AppCompatActivity {
         super.onDestroy();
         binding = null;
     }
+
+
+    public void createNotificationChannel() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            String channelId = "calorie_alert_channel";
+            String channelName = "Alertas de Calorías";
+            String channelDescription = "Notificaciones de exceso de calorías diarias";
+
+            NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH);
+            channel.setDescription(channelDescription);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+
+            askPermission();
+        }
+    }
+
+
+    public void askPermission() {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+                ActivityCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, 101);
+        }
+    }
+
+    public void lanzarNotificacionExcesoCalorias() {
+        String channelId = "calorie_alert_channel";
+        Intent intent = new Intent(this, HomeActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId)
+                .setSmallIcon(R.drawable.ic_notifications)
+                .setContentTitle("Alerta de Exceso de Calorías")
+                .setContentText("Has excedido tu consumo diario de calorías. Considera hacer ejercicio o reducir las calorías en tu próxima comida.")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+            notificationManager.notify(1, builder.build());
+        }
+    }
+
 }
